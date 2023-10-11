@@ -18,7 +18,7 @@
 
 3. (optional)to change `port`, update `port` in `ktrl/process/db-writer.process.json`
 4. install `kuki` by running `pip install kuki`
-5. cd this folder and start process, using the following command
+5. cd this folder and start process, using ktrl(a command from kuki)
 
 ```
 ktrl --start --profile q4 --process db-writer

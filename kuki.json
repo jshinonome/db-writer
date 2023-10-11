@@ -1,0 +1,12 @@
+{
+  "name": "db-writer",
+  "version": "0.0.1",
+  "description": "a simple db writer package",
+  "author": "Jo Shinonome",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "type": "q",
+  "dependencies": {}
+}

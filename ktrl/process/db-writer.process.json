@@ -1,0 +1,6 @@
+{
+  "file": "dbWriter.q",
+  "dbPath": "/tmp/hdb",
+  "args": [],
+  "port": 51800
+}

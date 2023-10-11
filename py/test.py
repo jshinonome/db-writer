@@ -25,8 +25,12 @@ data = pd.DataFrame(
         "ric": ["a", "b", "c"],
         "qty": [1, 2, 3],
         "price": [1, 2, 3],
+        "tradeFlag": ["open", "", "close"],
     }
 )
+# cast to bytes, hence save as kdb string
+data.tradeFlag = data.tradeFlag.apply(lambda s: bytes(s, "utf-8"))
+
 # write partition
 db_write(q, "trade", date.today(), ["ric"], data)
 # upsert partition

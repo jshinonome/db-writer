@@ -19,3 +19,5 @@
   .log.Info ("Upsert";count data;"to";tableName;"on";dt);
   :1b;
  };
+
+.z.zd: 17 2 6;

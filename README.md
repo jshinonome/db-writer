@@ -29,13 +29,13 @@ ktrl --start --profile q4 --process db-writer
 ```
 // if from same linux server, we can just open port number
 h: hopen 51800;
-// (.dbWriter.Write;tableName;date;sortColumns;data)
+// (.dbWriter.Write;tableName;date;sortColumns;data;parUnit)
 data:([]date:.z.D;ric:`a`b;qty:1 2;price:1 2);
 // write a new partition
-h (`.dbWriter.Write;`trade;.z.D;`ric;data);
+h (`.dbWriter.Write;`trade;.z.D;`ric;data;`year);
 
 // upsert to an exiting partition
-h (`.dbWriter.Upsert;`trade;.z.D;`ric;data);
+h (`.dbWriter.Upsert;`trade;.z.D;`ric;data;`year);
 
 ```
 

@@ -1,20 +1,30 @@
 from datetime import date
-from typing import List
+from typing import List, Literal
 
 import pandas as pd
 import pykx
 
 
 def db_write(
-    q: pykx.QConnection, tableName: str, date: date, sortColumns: List[str], data: pd.DataFrame
+    q: pykx.QConnection,
+    tableName: str,
+    date: date,
+    sortColumns: List[str],
+    data: pd.DataFrame,
+    partitionUnit: Literal["year", "month", "date"],
 ):
-    q(".dbWriter.Write", tableName, date, sortColumns, data)
+    q(".dbWriter.Write", tableName, date, sortColumns, data, partitionUnit)
 
 
 def db_upsert(
-    q: pykx.QConnection, tableName: str, date: date, sortColumns: List[str], data: pd.DataFrame
+    q: pykx.QConnection,
+    tableName: str,
+    date: date,
+    sortColumns: List[str],
+    data: pd.DataFrame,
+    partitionUnit: Literal["year", "month", "date"],
 ):
-    q(".dbWriter.Upsert", tableName, date, sortColumns, data)
+    q(".dbWriter.Upsert", tableName, date, sortColumns, data, partitionUnit)
 
 
 q = pykx.QConnection("localhost", 51800)
@@ -32,6 +42,6 @@ data = pd.DataFrame(
 data.tradeFlag = data.tradeFlag.apply(lambda s: bytes(s, "utf-8"))
 
 # write partition
-db_write(q, "trade", date.today(), ["ric"], data)
+db_write(q, "trade", date.today(), ["ric"], data, "year")
 # upsert partition
-db_upsert(q, "trade", date.today(), ["ric"], data)
+db_upsert(q, "trade", date.today(), ["ric"], data, "year")

@@ -42,3 +42,21 @@ h (`.dbWriter.Upsert;`trade;.z.D;`ric;data;`year);
 ## Write data from pykx
 
 > refer `py/test.py`
+
+## Load Taq Quote(NBBO) gz
+
+install latest kuki
+
+cd this repo and run the following command, 25min per date, 30MB memory, 3GB disk per date
+
+```
+bash script/loadTaq.sh /home/jshinonome/Downloads/taq/EQY_US_ALL_NBBO_20230703.gz ./hdb quote
+```
+
+> update this line to use a bigger chunk size
+
+```q
+/ src/pipeLoader.q, line 33
+  .Q.fpn[.pipe.quote.Load;`:/tmp/taq.pipe;5000000];
+
+```

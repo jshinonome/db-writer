@@ -23,8 +23,9 @@ def db_upsert(
     sortColumns: List[str],
     data: pd.DataFrame,
     partitionUnit: Literal["year", "month", "date"],
+    keyColumns: List[str],
 ):
-    q(".dbWriter.Upsert", tableName, date, sortColumns, data, partitionUnit)
+    q(".dbWriter.Upsert", tableName, date, sortColumns, data, partitionUnit, keyColumns)
 
 
 q = pykx.QConnection("localhost", 51800)
@@ -42,6 +43,6 @@ data = pd.DataFrame(
 data.tradeFlag = data.tradeFlag.apply(lambda s: bytes(s, "utf-8"))
 
 # write partition
-db_write(q, "trade", date.today(), ["ric"], data, "year")
+db_write(q, "trade", date.today(), ["date", "ric"], data, "year")
 # upsert partition
-db_upsert(q, "trade", date.today(), ["ric"], data, "year")
+db_upsert(q, "trade", date.today(), ["date", "ric"], data, "year", ["date", "ric"])

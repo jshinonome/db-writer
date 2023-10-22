@@ -59,8 +59,8 @@
 .pipe.hdbPath:hsym .cli.Args `hdbPath;
 
 if[11h=not type key .pipe.hdbPath;
-  .log.Error(.pipe.hdbPath;"not found or not a directory");
-  exit 1;
+  .log.Error(.pipe.hdbPath;"not found or not a directory - ", string .pipe.hdbPath);
+  exit 1
  ];
 
 .pipe.parPath:.Q.dd[.Q.par[.pipe.hdbPath;"D"$-3_-11#string .cli.Args[`gzFilepath];.cli.Args`table];`];
